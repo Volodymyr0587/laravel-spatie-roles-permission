@@ -4,6 +4,9 @@ use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use App\Livewire\Settings\TwoFactor;
+use App\Livewire\Users\UserCreate;
+use App\Livewire\Users\UserEdit;
+use App\Livewire\Users\UserIndex;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 
@@ -32,4 +35,8 @@ Route::middleware(['auth'])->group(function () {
             ),
         )
         ->name('two-factor.show');
+
+    Route::get('users', UserIndex::class)->name('users.index');
+    Route::get('users/create', UserCreate::class)->name('users.create');
+    Route::get('users/{user}/edit', UserEdit::class)->name('users.edit');
 });
