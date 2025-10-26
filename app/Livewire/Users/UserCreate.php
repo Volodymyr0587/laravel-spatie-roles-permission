@@ -4,12 +4,20 @@ namespace App\Livewire\Users;
 
 use App\Models\User;
 use Livewire\Component;
+use Spatie\Permission\Models\Role;
 
 class UserCreate extends Component
 {
     public string $name;
     public string $email;
     public string $password;
+    public array $allRoles = [];
+    public array $selectedRoles = [];
+
+    public function mount()
+    {
+        $this->allRoles = Role::pluck('name')->toArray();
+    }
 
     protected function rules(): array
     {
@@ -24,11 +32,15 @@ class UserCreate extends Component
     {
         $this->validate();
 
-        User::create([
+        $user = User::create([
             'name' => $this->name,
             'email' => $this->email,
             'password' => bcrypt($this->password),
         ]);
+
+        if (!empty($this->selectedRoles)) {
+            $user->assignRole($this->selectedRoles);
+        }
 
         session()->flash('message', 'User created successfully');
 

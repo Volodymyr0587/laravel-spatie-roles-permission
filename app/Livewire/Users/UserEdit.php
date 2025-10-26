@@ -3,8 +3,9 @@
 namespace App\Livewire\Users;
 
 use App\Models\User;
-use Illuminate\Validation\Rule;
 use Livewire\Component;
+use Illuminate\Validation\Rule;
+use Spatie\Permission\Models\Role;
 
 class UserEdit extends Component
 {
@@ -12,6 +13,8 @@ class UserEdit extends Component
     public string $name = '';
     public string $email = '';
     public string|null $password = null;
+    public array $allRoles = [];
+    public array $selectedRoles = [];
 
     protected function rules(): array
     {
@@ -27,6 +30,8 @@ class UserEdit extends Component
         $this->user = $user;
         $this->name = $user->name;
         $this->email = $user->email;
+        $this->selectedRoles = $user->roles->pluck('name')->toArray();
+        $this->allRoles = Role::pluck('name')->toArray();
     }
 
     public function updateUser()
@@ -38,6 +43,8 @@ class UserEdit extends Component
             'email' => $this->email,
             'password' => empty($this->password) ? $this->user->password : bcrypt($this->password),
         ]);
+
+        $this->user->syncRoles($this->selectedRoles);
 
         session()->flash('message', 'User updated successfully');
 

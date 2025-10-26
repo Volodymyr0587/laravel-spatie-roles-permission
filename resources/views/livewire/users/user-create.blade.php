@@ -17,6 +17,17 @@
             <flux:input name="password" wire:model="password" :label="__('Password')" type="password" autocomplete="new-password"
                 :placeholder="__('Password')" viewable />
 
+            <!-- Roles -->
+            <flux:checkbox.group wire:model="selectedRoles" label="Roles" class="flex flex-wrap space-x-4">
+                <flux:checkbox.all label="Check all" />
+                <flux:separator class="my-2" />
+                @foreach ($allRoles as $role)
+                    <div class="bg-gray-50 dark:bg-neutral-900 dark:text-gray-400 rounded-md px-3 py-1 mb-2">
+                        <flux:checkbox label="{{ $role }}" value="{{ $role }}" />
+                    </div>
+                @endforeach
+            </flux:checkbox.group>
+
             <div class="flex items-center justify-end">
                 <flux:button type="submit" variant="primary" class="w-full cursor-pointer">
                     Create User
