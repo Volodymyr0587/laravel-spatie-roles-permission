@@ -15,7 +15,7 @@
                 <flux:separator class="my-2" />
                 @foreach ($allPermissions as $permission)
                     <div class="bg-gray-50 dark:bg-neutral-900 dark:text-gray-400 rounded-md px-3 py-1 mb-2">
-                        <flux:checkbox label="{{ $permission->name }}" value="{{ $permission->name }}" />
+                        <flux:checkbox label="{{ $permission }}" value="{{ $permission }}" />
                     </div>
                 @endforeach
             </flux:checkbox.group>
