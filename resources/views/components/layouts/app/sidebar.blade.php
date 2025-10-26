@@ -14,10 +14,18 @@
             <flux:navlist variant="outline">
                 <flux:navlist.group :heading="__('Platform')" class="grid">
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                    @canany(['view_users', 'view_any_users'])
                     <flux:navlist.item icon="users" :href="route('users.index')" :current="request()->routeIs('users.index')" wire:navigate>{{ __('Users') }}</flux:navlist.item>
+                    @endcanany
+                    @canany(['view_posts', 'view_any_posts'])
                     <flux:navlist.item icon="document" :href="route('posts.index')" :current="request()->routeIs('posts.index')" wire:navigate>{{ __('Posts') }}</flux:navlist.item>
+                    @endcanany
+                    @canany(['view_roles', 'view_any_roles'])
                     <flux:navlist.item icon="lock-closed" :href="route('roles.index')" :current="request()->routeIs('roles.index')" wire:navigate>{{ __('Roles') }}</flux:navlist.item>
+                    @endcanany
+                    @canany(['view_permissions', 'view_any_permissions'])
                     <flux:navlist.item icon="key" :href="route('permissions.index')" :current="request()->routeIs('permissions.index')" wire:navigate>{{ __('Permissions') }}</flux:navlist.item>
+                    @endcanany
                 </flux:navlist.group>
             </flux:navlist>
 

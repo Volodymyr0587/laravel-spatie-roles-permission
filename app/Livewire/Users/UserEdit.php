@@ -31,7 +31,7 @@ class UserEdit extends Component
         $this->name = $user->name;
         $this->email = $user->email;
         $this->selectedRoles = $user->roles->pluck('name')->toArray();
-        $this->allRoles = Role::pluck('name')->toArray();
+        $this->allRoles = Role::whereNot('name', 'super_admin')->pluck('name')->toArray();
     }
 
     public function updateUser()

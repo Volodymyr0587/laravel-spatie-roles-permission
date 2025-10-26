@@ -6,9 +6,12 @@
             <flux:subheading size="lg">List of all users</flux:subheading>
         </div>
         <div>
-            <flux:button href="{{ route('users.create') }}" icon:trailing="arrow-up-right">
-                New User
-            </flux:button>
+            @can('create_users')
+                <flux:button href="{{ route('users.create') }}" icon:trailing="arrow-up-right">
+                    New User
+                </flux:button>
+            @endcan
+
         </div>
     </div>
 
@@ -45,12 +48,17 @@
                             {{ $user->email }}
                         </td>
                         <td class="px-6 py-4">
-                            <flux:button href="{{ route('users.edit', $user->id) }}" size="sm" variant="primary" color="green" icon:trailing="pencil">
-                            </flux:button>
-                            <flux:button wire:click="deleteUser({{ $user->id }})" size="sm" variant="danger"
-                                wire:confirm="Are you sure you want to delete this user?" color="red"
-                                icon:trailing="trash" class="cursor-pointer">
-                            </flux:button>
+                            @can('update_users')
+                                <flux:button href="{{ route('users.edit', $user->id) }}" size="sm" variant="primary" color="green" icon:trailing="pencil">
+                                </flux:button>
+                            @endcan
+                            @can('delete_users')
+                                <flux:button wire:click="deleteUser({{ $user->id }})" size="sm" variant="danger"
+                                    wire:confirm="Are you sure you want to delete this user?" color="red"
+                                    icon:trailing="trash" class="cursor-pointer">
+                                </flux:button>
+                            @endcan
+
                         </td>
                     </tr>
 

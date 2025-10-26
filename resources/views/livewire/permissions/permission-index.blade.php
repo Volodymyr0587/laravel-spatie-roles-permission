@@ -53,7 +53,7 @@
         </table>
 
         <div class="p-10">
-            {{ $permissions->links() }}
+            {{ $permissions->links('pagination.custom-tailwind') }}
         </div>
     </div>
 

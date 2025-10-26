@@ -16,7 +16,7 @@ class UserCreate extends Component
 
     public function mount()
     {
-        $this->allRoles = Role::pluck('name')->toArray();
+        $this->allRoles = Role::whereNot('name', 'super_admin')->pluck('name')->toArray();
     }
 
     protected function rules(): array

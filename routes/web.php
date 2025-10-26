@@ -45,19 +45,43 @@ Route::middleware(['auth'])->group(function () {
         )
         ->name('two-factor.show');
 
-    Route::get('users', UserIndex::class)->name('users.index');
-    Route::get('users/create', UserCreate::class)->name('users.create');
-    Route::get('users/{user}/edit', UserEdit::class)->name('users.edit');
+    Route::get('users', UserIndex::class)
+        ->middleware('can:view_any_users')
+        ->name('users.index');
+    Route::get('users/create', UserCreate::class)
+        ->middleware('can:create_users')
+        ->name('users.create');
+    Route::get('users/{user}/edit', UserEdit::class)
+        ->middleware('can:update_users')
+        ->name('users.edit');
 
-    Route::get('posts', PostIndex::class)->name('posts.index');
-    Route::get('posts/create', PostCreate::class)->name('posts.create');
-    Route::get('posts/{post}/edit', PostEdit::class)->name('posts.edit');
+    Route::get('posts', PostIndex::class)
+        ->middleware('can:view_any_posts')
+        ->name('posts.index');
+    Route::get('posts/create', PostCreate::class)
+        ->middleware('can:create_posts')
+        ->name('posts.create');
+    Route::get('posts/{post}/edit', PostEdit::class)
+        ->middleware('can:update_posts')
+        ->name('posts.edit');
 
-    Route::get('roles', RoleIndex::class)->name('roles.index');
-    Route::get('roles/create', RoleCreate::class)->name('roles.create');
-    Route::get('roles/{role}/edit', RoleEdit::class)->name('roles.edit');
+    Route::get('roles', RoleIndex::class)
+        ->middleware('can:view_any_roles')
+        ->name('roles.index');
+    Route::get('roles/create', RoleCreate::class)
+        ->middleware('can:create_roles')
+        ->name('roles.create');
+    Route::get('roles/{role}/edit', RoleEdit::class)
+        ->middleware('can:update_roles')
+        ->name('roles.edit');
 
-    Route::get('permissions', PermissionIndex::class)->name('permissions.index');
-    Route::get('permissions/create', PermissionCreate::class)->name('permissions.create');
-    Route::get('permissions/{permission}/edit', PermissionEdit::class)->name('permissions.edit');
+    Route::get('permissions', PermissionIndex::class)
+        ->middleware('can:view_any_permissions')
+        ->name('permissions.index');
+    Route::get('permissions/create', PermissionCreate::class)
+        ->middleware('can:create_permissions')
+        ->name('permissions.create');
+    Route::get('permissions/{permission}/edit', PermissionEdit::class)
+        ->middleware('can:update_permissions')
+        ->name('permissions.edit');
 });

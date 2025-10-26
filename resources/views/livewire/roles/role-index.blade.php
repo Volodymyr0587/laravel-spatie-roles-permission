@@ -6,9 +6,12 @@
             <flux:subheading size="lg">List of all roles</flux:subheading>
         </div>
         <div>
-            <flux:button href="{{ route('roles.create') }}" icon:trailing="arrow-up-right">
-                New Role
-            </flux:button>
+            @can('create_roles')
+                <flux:button href="{{ route('roles.create') }}" icon:trailing="arrow-up-right">
+                    New Role
+                </flux:button>
+            @endcan
+
         </div>
     </div>
 
@@ -39,12 +42,16 @@
                             {{ $role->name }}
                         </td>
                         <td class="px-6 py-4">
+                            @can('update_roles')
                             <flux:button href="{{ route('roles.edit', $role->id) }}" size="sm" variant="primary" color="green" icon:trailing="pencil">
                             </flux:button>
+                            @endcan
+                            @can('delete_roles')
                             <flux:button wire:click="deleteRole({{ $role->id }})" size="sm" variant="danger"
                                 wire:confirm="Are you sure you want to delete this role?" color="red"
                                 icon:trailing="trash" class="cursor-pointer">
                             </flux:button>
+                            @endcan
                         </td>
                     </tr>
 
