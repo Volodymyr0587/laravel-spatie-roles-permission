@@ -15,6 +15,12 @@ class RoleIndex extends Component
         $role = Role::findOrFail($roleId);
         $role->delete();
     }
+
+    public function paginationView()
+    {
+        return 'pagination.custom-tailwind';
+    }
+
     public function render()
     {
         $roles = Role::paginate(10);

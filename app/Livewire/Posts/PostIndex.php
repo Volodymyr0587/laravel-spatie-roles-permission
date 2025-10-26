@@ -15,6 +15,12 @@ class PostIndex extends Component
         $post = Post::findOrFail($postId);
         $post->delete();
     }
+
+    public function paginationView()
+    {
+        return 'pagination.custom-tailwind';
+    }
+
     public function render()
     {
         $posts = Post::with('user')->paginate(3);

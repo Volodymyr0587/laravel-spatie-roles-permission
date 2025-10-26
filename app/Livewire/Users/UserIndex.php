@@ -15,9 +15,15 @@ class UserIndex extends Component
         $user = User::findOrFail($userId);
         $user->delete();
     }
+
+    public function paginationView()
+    {
+        return 'pagination.custom-tailwind';
+    }
+
     public function render()
     {
-        $users = User::paginate(3);
+        $users = User::paginate(10);
         return view('livewire.users.user-index', ['users' => $users]);
     }
 }

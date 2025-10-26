@@ -15,6 +15,12 @@ class PermissionIndex extends Component
         $permission = Permission::findOrFail($permissionId);
         $permission->delete();
     }
+
+    public function paginationView()
+    {
+        return 'pagination.custom-tailwind';
+    }
+
     public function render()
     {
         $permissions = Permission::paginate(10);
