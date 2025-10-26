@@ -31,6 +31,9 @@
                         Email
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        Roles
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         Actions
                     </th>
                 </tr>
@@ -46,6 +49,11 @@
                         </td>
                         <td class="px-6 py-4">
                             {{ $user->email }}
+                        </td>
+                        <td class="px-6 py-4">
+                            @foreach ($user->roles as $role)
+                                <span class="px-2 py-1.5 rounded-md bg-amber-400 text-black font-semibold text-sm">{{ $role->name }}</span>
+                            @endforeach
                         </td>
                         <td class="px-6 py-4">
                             @can('update_users')
