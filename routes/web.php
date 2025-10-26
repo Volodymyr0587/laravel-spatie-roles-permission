@@ -1,5 +1,11 @@
 <?php
 
+use App\Livewire\Permissions\PermissionCreate;
+use App\Livewire\Permissions\PermissionEdit;
+use App\Livewire\Permissions\PermissionIndex;
+use App\Livewire\Roles\RoleCreate;
+use App\Livewire\Roles\RoleEdit;
+use App\Livewire\Roles\RoleIndex;
 use Laravel\Fortify\Features;
 use App\Livewire\Posts\PostEdit;
 use App\Livewire\Users\UserEdit;
@@ -46,4 +52,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('posts', PostIndex::class)->name('posts.index');
     Route::get('posts/create', PostCreate::class)->name('posts.create');
     Route::get('posts/{post}/edit', PostEdit::class)->name('posts.edit');
+
+    Route::get('roles', RoleIndex::class)->name('roles.index');
+    Route::get('roles/create', RoleCreate::class)->name('roles.create');
+    Route::get('roles/{role}/edit', RoleEdit::class)->name('roles.edit');
+
+    Route::get('permissions', PermissionIndex::class)->name('permissions.index');
+    Route::get('permissions/create', PermissionCreate::class)->name('permissions.create');
+    Route::get('permissions/{permission}/edit', PermissionEdit::class)->name('permissions.edit');
 });
